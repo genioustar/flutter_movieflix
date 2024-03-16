@@ -4,6 +4,7 @@ import 'package:toonflex/models/movie_detail_model.dart';
 import 'package:toonflex/models/movie_model.dart';
 import 'package:toonflex/services/api_service.dart';
 import 'package:toonflex/widgets/buy_button_widget.dart';
+import 'package:toonflex/widgets/star_rating.dart';
 
 class DetailScreen extends StatefulWidget {
   final int index;
@@ -89,28 +90,25 @@ class _DetailScreenState extends State<DetailScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Hero(
-                tag: widget.movie.id,
-                child: Container(
-                  width: 200,
-                  clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.8),
-                        spreadRadius: 3,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: Image.network(
-                    "https://image.tmdb.org/t/p/w500${widget.movie.posterPath}",
-                    width: 100,
-                    fit: BoxFit.cover,
-                  ),
+              Container(
+                width: 200,
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.grey,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.8),
+                      spreadRadius: 3,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Image.network(
+                  "https://image.tmdb.org/t/p/w500${widget.movie.posterPath}",
+                  width: 100,
+                  fit: BoxFit.cover,
                 ),
               ),
             ],
@@ -127,6 +125,13 @@ class _DetailScreenState extends State<DetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Text(
+                        snapshot.data!.title,
+                        style: const TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 20),
+                      StarRating(rating: snapshot.data!.voteAverage),
                       Text(snapshot.data!.overview),
                       const SizedBox(height: 20),
                       Text(snapshot.data!.genres),
