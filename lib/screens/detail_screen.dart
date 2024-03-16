@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:toonflex/models/movie_detail_model.dart';
 import 'package:toonflex/models/movie_model.dart';
 import 'package:toonflex/services/api_service.dart';
+import 'package:toonflex/widgets/buy_button_widget.dart';
 
 class DetailScreen extends StatefulWidget {
   final int index;
@@ -74,7 +75,6 @@ class _DetailScreenState extends State<DetailScreen> {
           FutureBuilder(
             future: movieDetail,
             builder: (context, snapshot) {
-              print(snapshot.data);
               if (snapshot.hasData) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 50.0),
@@ -84,6 +84,8 @@ class _DetailScreenState extends State<DetailScreen> {
                       Text(snapshot.data!.overview),
                       const SizedBox(height: 20),
                       Text(snapshot.data!.genres),
+                      const SizedBox(height: 20),
+                      BuyButtonWidgets(url: snapshot.data!.homepage),
                     ],
                   ),
                 );

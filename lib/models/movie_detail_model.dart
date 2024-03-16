@@ -1,6 +1,12 @@
 class MovieDetailModel {
   bool adult;
-  String backdropPath, posterPath, title, overview, releaseDate, genres;
+  String backdropPath,
+      posterPath,
+      title,
+      overview,
+      releaseDate,
+      genres,
+      homepage;
   int runtime, voteCount;
   double voteAverage;
   // List<Map<String, dynamic>> genres;
@@ -14,6 +20,7 @@ class MovieDetailModel {
         runtime = json['runtime'],
         voteAverage = json['vote_average'],
         voteCount = json['vote_count'],
+        homepage = json['homepage'] ?? '',
         // genres = List<Map<String, dynamic>>.from(
         //     json['genres'].map((genre) => Map<String, dynamic>.from(genre)));
         genres = (json['genres'] as List)

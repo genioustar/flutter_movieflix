@@ -26,10 +26,12 @@ class HomeScreen extends StatelessWidget {
           if (snapshot.hasData) {
             return Column(
               children: [
-                const SizedBox(
-                  height: 0,
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: 200,
+                  width: double.infinity,
+                  child: makeList(snapshot),
                 ),
-                Expanded(child: makeList(snapshot)),
               ],
             );
           } else {

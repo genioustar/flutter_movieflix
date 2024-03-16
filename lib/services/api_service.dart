@@ -14,7 +14,7 @@ class ApiService {
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final List<dynamic> movies = jsonDecode(response.body)['results'];
-      print(movies);
+      print('nowPlaying: ${movies.length}');
       for (var m in movies) {
         movieInstances.add(MovieModel.fromJson(m));
       }
@@ -40,6 +40,7 @@ class ApiService {
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final List<dynamic> movies = jsonDecode(response.body)['results'];
+      print('popular: ${movies.length}');
       for (var m in movies) {
         movieInstances.add(MovieModel.fromJson(m));
       }
@@ -55,6 +56,7 @@ class ApiService {
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final List<dynamic> movies = jsonDecode(response.body)['results'];
+      print('comingSoon: ${movies.length}');
       for (var m in movies) {
         movieInstances.add(MovieModel.fromJson(m));
       }
