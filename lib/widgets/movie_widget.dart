@@ -24,25 +24,28 @@ class Movie extends StatelessWidget {
       },
       child: Column(
         children: [
-          Container(
-            width: 100,
-            clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.grey,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.8),
-                  spreadRadius: 3,
-                  blurRadius: 5,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Image.network(
-              "https://image.tmdb.org/t/p/w500${movie.posterPath}",
+          Hero(
+            tag: movie.id,
+            child: Container(
               width: 100,
-              fit: BoxFit.cover,
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.8),
+                    spreadRadius: 3,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Image.network(
+                "https://image.tmdb.org/t/p/w500${movie.posterPath}",
+                width: 100,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           const SizedBox(

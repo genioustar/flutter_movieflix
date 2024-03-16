@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toonflex/models/movie_model.dart';
 import 'package:toonflex/services/api_service.dart';
-import 'package:toonflex/widgets/movie.dart';
+import 'package:toonflex/widgets/movie_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
