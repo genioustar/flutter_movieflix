@@ -8,7 +8,8 @@ class MovieModel {
       title,
       posterPath;
   int id, voteCount;
-  double popularity, voteAverage;
+  double popularity;
+  dynamic voteAverage; // double or int
   List<int> genreIds;
 
 // named constructor
