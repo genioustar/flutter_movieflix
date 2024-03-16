@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toonflex/models/movie_detail_model.dart';
 import 'package:toonflex/models/movie_model.dart';
 import 'package:toonflex/services/api_service.dart';
@@ -15,11 +16,46 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   late final Future<MovieDetailModel> movieDetail;
+  late final SharedPreferences prefs;
+  bool isLiked = false;
 
+  Future initPrefs() async {
+    prefs = await SharedPreferences.getInstance();
+    final likedMovies = prefs.getStringList('likedMovies');
+    if (likedMovies != null) {
+      if (likedMovies.contains(widget.movie.id.toString())) {
+        setState(() {
+          isLiked = true;
+        });
+      } else {
+        print('This movie is not liked');
+      }
+    } else {
+      prefs.setStringList('likedMovies', []);
+    }
+  }
+
+  onHeartTap() {
+    final likedMovies = prefs.getStringList('likedMovies');
+    if (likedMovies != null) {
+      if (isLiked) {
+        likedMovies.remove(widget.movie.id.toString());
+      } else {
+        likedMovies.add(widget.movie.id.toString());
+      }
+      prefs.setStringList('likedMovies', likedMovies);
+    }
+    setState(() {
+      isLiked = !isLiked;
+    });
+  }
+
+// build 하기전에 단 한번만 실행(initState())
   @override
   void initState() {
     super.initState();
     movieDetail = ApiService.getMovieDetail(widget.movie.id.toString());
+    initPrefs();
   }
 
   @override
@@ -34,6 +70,16 @@ class _DetailScreenState extends State<DetailScreen> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 2,
+        actions: [
+          IconButton(
+            onPressed: () {
+              onHeartTap();
+            },
+            icon:
+                Icon(isLiked ? Icons.favorite : Icons.favorite_border_outlined),
+            color: Colors.black,
+          ),
+        ],
       ),
       body: Column(
         children: [
